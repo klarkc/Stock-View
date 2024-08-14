@@ -9,12 +9,14 @@ import Effect.Aff (Aff)
 import Effect.Console as Console
 import Halogen as H
 import Halogen.HTML as HH
+import Halogen.HTML.CSS (style)
 import Halogen (liftAff)
 import Effect.Aff.Class (class MonadAff)
 import Data.List.Types (List(..))
 import Data.Maybe (Maybe(..))
 import Data.Either (Either(..))
 import Data.Array as Array
+import Styles.Inventory (inventoryContainerStyle, inventoryItemStyle)
 
 -- Define the InventoryItem type
 data InventoryItem = InventoryItem
@@ -54,18 +56,10 @@ handleAction = case _ of
       Left err -> H.modify_ \s -> s { errorMsg = Just err }
       Right items -> H.modify_ \s -> s { items = items }
 
-  -- Handle InventoryLoaded explicitly
-  InventoryLoaded (Left err) -> do
-    H.modify_ \s -> s { errorMsg = Just err }
-
-  InventoryLoaded (Right items) -> do
-    H.modify_ \s -> s { items = items }
-
-
 -- Render the component
 render :: forall m. MonadAff m => State -> H.ComponentHTML Action () m
 render state =
-  HH.div_
+  HH.div_ [ style inventoryContainerStyle ]
     [ HH.div_
         [ HH.h1_ [ HH.text "Inventory" ]
         ]
@@ -77,7 +71,7 @@ render state =
 -- Render each item in the inventory
 renderItem :: forall m. MonadAff m => InventoryItem -> H.ComponentHTML Action () m
 renderItem (InventoryItem { name, description, quantity }) =
-  HH.div_
+  HH.div_ [ style inventoryItemStyle ]
     [ HH.div_ [ HH.text name ]
     , HH.div_ [ HH.text $ "Description: " <> description ]
     , HH.div_ [ HH.text $ "Quantity: " <> show quantity ]
@@ -89,4 +83,3 @@ loadInventory = do
   let items = Cons (InventoryItem { id: "1", name: "Item 1", description: "Description for Item 1", quantity: 100 })
                    (Cons (InventoryItem { id: "2", name: "Item 2", description: "Description for Item 2", quantity: 50 }) Nil)
   pure (Right items)
-
