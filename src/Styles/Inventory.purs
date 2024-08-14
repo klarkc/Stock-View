@@ -24,9 +24,9 @@ inventoryItemStyle :: CSS
 inventoryItemStyle = do
   backgroundColor white
   border solid (px 1.0) black
-  borderRadius (px 5.0)
-  boxShadow $ singleton $ bsColor (rgba 0 0 0 0.1) $ shadowWithBlur (px 0.0) (px 2.0) (px 5.0)
+  borderRadius (px 5.0)  
   padding (px 15.0)
   margin (px 10.0)
   width (px 250.0)
+  boxShadow $ singleton $ bsColor (rgba 0 0 0 0.1) (shadowWithBlur (px 0.0) (px 2.0) (px 5.0))
   boxSizing borderBox
