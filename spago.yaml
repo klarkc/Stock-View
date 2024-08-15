@@ -15,6 +15,6 @@ workspace:
     cmd: purescm
     args:
       - "build"
-  extra_packages: {}
-  package_set:
+  extraPackages: {}
+  packageSet:
     registry: 57.2.0

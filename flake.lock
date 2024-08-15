@@ -32,6 +32,38 @@
         "type": "github"
       }
     },
+    "flake-compat_3": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_4": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1696426674,
+        "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "0f9255e01c2351cc7d116c072cb317785dd33b33",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1704290814,
@@ -48,13 +80,72 @@
         "type": "github"
       }
     },
-    "purescript-overlay": {
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1719931832,
+        "narHash": "sha256-0LD+KePCKKEb4CcPsTBOwf019wDtZJanjoKm1S8q3Do=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "0aeab749216e4c073cece5d34bc01b79e717c3e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "purescm": {
       "inputs": {
         "flake-compat": "flake-compat_2",
+        "nixpkgs": "nixpkgs_2",
+        "purescript-overlay": "purescript-overlay"
+      },
+      "locked": {
+        "lastModified": 1720300368,
+        "narHash": "sha256-UdRV/Pct4WQWzyKfIoAHR8K53wzMtdgqbSb3UQ9ltKU=",
+        "owner": "purescm",
+        "repo": "purescm",
+        "rev": "e891f4292630cae4d0ff1143a1594f600fc58512",
+        "type": "github"
+      },
+      "original": {
+        "owner": "purescm",
+        "repo": "purescm",
+        "type": "github"
+      }
+    },
+    "purescript-overlay": {
+      "inputs": {
+        "flake-compat": "flake-compat_3",
         "nixpkgs": [
+          "purescm",
           "nixpkgs"
         ],
         "slimlock": "slimlock"
+      },
+      "locked": {
+        "lastModified": 1719849006,
+        "narHash": "sha256-0HpRwEdvAlbSka5tFLwokz2bEV+QgoGqRZ0BR/ghB6w=",
+        "owner": "thomashoneyman",
+        "repo": "purescript-overlay",
+        "rev": "6a00f4a8fbb42e0494a57c5da99b1375721a6c4b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thomashoneyman",
+        "repo": "purescript-overlay",
+        "type": "github"
+      }
+    },
+    "purescript-overlay_2": {
+      "inputs": {
+        "flake-compat": "flake-compat_4",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "slimlock": "slimlock_2"
       },
       "locked": {
         "lastModified": 1710339258,
@@ -74,10 +165,33 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "nixpkgs": "nixpkgs",
-        "purescript-overlay": "purescript-overlay"
+        "purescm": "purescm",
+        "purescript-overlay": "purescript-overlay_2"
       }
     },
     "slimlock": {
+      "inputs": {
+        "nixpkgs": [
+          "purescm",
+          "purescript-overlay",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1688756706,
+        "narHash": "sha256-xzkkMv3neJJJ89zo3o2ojp7nFeaZc2G0fYwNXNJRFlo=",
+        "owner": "thomashoneyman",
+        "repo": "slimlock",
+        "rev": "cf72723f59e2340d24881fd7bf61cb113b4c407c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thomashoneyman",
+        "repo": "slimlock",
+        "type": "github"
+      }
+    },
+    "slimlock_2": {
       "inputs": {
         "nixpkgs": [
           "purescript-overlay",
