@@ -1,12 +1,10 @@
 module Main where
 
-import Prelude
+
+import Data.Unit (Unit)
 import Effect (Effect)
-import Halogen.Aff (runHalogenAff, awaitBody)
-import Halogen.VDom.Driver (runUI)
-import InventoryComponent (inventoryComponent)
+import Effect.Console (log)
+
 
 main :: Effect Unit
-main = runHalogenAff do
-  body <- awaitBody
-  runUI inventoryComponent {} body
+main = log "Hello, World!"

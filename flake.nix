@@ -2,6 +2,7 @@
   description = "Stock View";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    purescm.url = "github:/purescm/purescm";
     purescript-overlay = {
       url = "github:cardanonix/purescript-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -14,6 +15,7 @@
     self,
     nixpkgs,
     purescript-overlay,
+    purescm,
     ...
   }: let
     name = "stockView";
@@ -49,6 +51,8 @@
             pkgs.purescript-language-server
             pkgs.spago-unstable
             pkgs.vite
+
+            # inputs.purescm
           ]
           ++ (pkgs.lib.optionals (system == "aarch64-darwin")
             (with pkgs.darwin.apple_sdk.frameworks; [
