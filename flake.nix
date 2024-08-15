@@ -41,7 +41,6 @@
           patchelf $out/bin/scheme --add-rpath ${pkgs.pcre2.out}/lib
         '';
       });
-      # pursBackendScm = pkgs.purs-backend-scm;
     in
       pkgs.mkShell {
         inherit name;
@@ -57,7 +56,6 @@
             pkgs.spago-unstable
             pkgs.vite
 
-            # Chez Scheme compiler and PureScript backend
             pkgs.purs-bin.purs-0_15_10
             pkgs.pkg-config
             pkgs.nodejs-slim
