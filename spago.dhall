@@ -8,8 +8,6 @@
                 , "either"
                 , "aff"
                 , "halogen"
-                , "halogen-css"
-                , "tuples"
                  ]
 , packages = ./packages.dhall
 , sources = [ "src/**/*.purs", "test/**/*.purs" ]

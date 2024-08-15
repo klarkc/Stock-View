@@ -9,14 +9,14 @@ import Effect.Aff (Aff)
 import Effect.Console as Console
 import Halogen as H
 import Halogen.HTML as HH
-import Halogen.HTML.CSS (style)
+import Halogen.HTML.Core (ClassName(..))
+import Halogen.HTML.Properties (class_)
 import Halogen (liftAff)
 import Effect.Aff.Class (class MonadAff)
 import Data.List.Types (List(..))
 import Data.Maybe (Maybe(..))
 import Data.Either (Either(..))
 import Data.Array as Array
-import Styles.Inventory (inventoryContainerStyle, inventoryItemStyle)
 
 -- Define the InventoryItem type
 data InventoryItem = InventoryItem
@@ -55,23 +55,31 @@ handleAction = case _ of
     case result of
       Left err -> H.modify_ \s -> s { errorMsg = Just err }
       Right items -> H.modify_ \s -> s { items = items }
+  
+  InventoryLoaded (Left err) -> do
+    H.modify_ \s -> s { errorMsg = Just err }
+
+  InventoryLoaded (Right items) -> do
+    H.modify_ \s -> s { items = items }
 
 -- Render the component
 render :: forall m. MonadAff m => State -> H.ComponentHTML Action () m
 render state =
-  HH.div_ [ style inventoryContainerStyle ]
+  HH.div_
+    [ class_ (ClassName "inventory-container") ]
     [ HH.div_
         [ HH.h1_ [ HH.text "Inventory" ]
         ]
     , case state.errorMsg of
-        Just err -> HH.div_ [ HH.text $ "Error: " <> err ]
+        Just err -> HH.div_ [ class_ (ClassName "error-message"), HH.text $ "Error: " <> err ]
         Nothing -> HH.div_ (Array.fromFoldable (map renderItem state.items))
     ]
 
 -- Render each item in the inventory
 renderItem :: forall m. MonadAff m => InventoryItem -> H.ComponentHTML Action () m
 renderItem (InventoryItem { name, description, quantity }) =
-  HH.div_ [ style inventoryItemStyle ]
+  HH.div_
+    [ class_ (ClassName "inventory-item") ]
     [ HH.div_ [ HH.text name ]
     , HH.div_ [ HH.text $ "Description: " <> description ]
     , HH.div_ [ HH.text $ "Quantity: " <> show quantity ]

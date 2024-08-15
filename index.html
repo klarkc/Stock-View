@@ -1,13 +1,14 @@
 <!doctype html>
 <html lang="en" data-framework="purescript">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	</head>
-	<body>
-		<script type="module">
-			import { main } from "./output/Main/index.js";
+  <head>
+    <script type="module" src="/@vite/client"></script>
 
-			main();
-		</script>
-	</body>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <script type="module" src="/index.html?html-proxy&index=0.js"></script>
+  </body>
 </html>
