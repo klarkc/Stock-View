@@ -2,7 +2,7 @@
   description = "Stock View";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     purescm.url = "github:/purescm/purescm";
     purescript-overlay = {
       url = "github:cardanonix/purescript-overlay";
@@ -58,7 +58,8 @@
             pkgs.vite
 
             # Chez Scheme compiler and PureScript backend
-            chez
+            pkgs.chez
+            pkgs.purescm
             # pursBackendScm
           ]
           ++ (pkgs.lib.optionals (system == "aarch64-darwin")
