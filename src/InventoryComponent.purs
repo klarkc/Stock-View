@@ -9,7 +9,6 @@ import Effect.Aff (Aff)
 import Effect.Console as Console
 import Halogen as H
 import Halogen.HTML as HH
-import Halogen.HTML.Core (ClassName(..))
 import Halogen.HTML.Properties (class_)
 import Halogen (liftAff)
 import Effect.Aff.Class (class MonadAff)
@@ -17,6 +16,7 @@ import Data.List.Types (List(..))
 import Data.Maybe (Maybe(..))
 import Data.Either (Either(..))
 import Data.Array as Array
+import Utils (css)
 
 -- Define the InventoryItem type
 data InventoryItem = InventoryItem
@@ -66,12 +66,13 @@ handleAction = case _ of
 render :: forall m. MonadAff m => State -> H.ComponentHTML Action () m
 render state =
   HH.div_
-    [ class_ (ClassName "inventory-container") ]
+    [ class_ $ HH.ClassName "inventory-container" ]
     [ HH.div_
-        [ HH.h1_ [ HH.text "Inventory" ]
+        [ class_ $ HH.ClassName "inventory-container__title"
+        , HH.h1_ [ HH.text "Inventory" ]
         ]
     , case state.errorMsg of
-        Just err -> HH.div_ [ class_ (ClassName "error-message"), HH.text $ "Error: " <> err ]
+        Just err -> HH.div_ [ class_ "error-message", HH.text $ "Error: " <> err ]
         Nothing -> HH.div_ (Array.fromFoldable (map renderItem state.items))
     ]
 
@@ -79,10 +80,10 @@ render state =
 renderItem :: forall m. MonadAff m => InventoryItem -> H.ComponentHTML Action () m
 renderItem (InventoryItem { name, description, quantity }) =
   HH.div_
-    [ class_ (ClassName "inventory-item") ]
-    [ HH.div_ [ HH.text name ]
-    , HH.div_ [ HH.text $ "Description: " <> description ]
-    , HH.div_ [ HH.text $ "Quantity: " <> show quantity ]
+    [ css "inventory-item" ]
+    [ HH.div_ [ class_ $ HH.ClassName "inventory-item__name", HH.text name ]
+    , HH.div_ [ class_ $ HH.ClassName "inventory-item__description", HH.text $ "Description: " <> description ]
+    , HH.div_ [ class_ $ HH.ClassName "inventory-item__quantity", HH.text $ "Quantity: " <> show quantity ]
     ]
 
 -- Function to load the inventory (simulated JSON load)

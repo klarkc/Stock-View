@@ -1,0 +1,48 @@
+/* styles.css */
+
+/* Block: inventory */
+.inventory-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .inventory-container__title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .inventory-item {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 15px;
+    margin: 10px;
+    width: 250px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+  .inventory-item__name {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .inventory-item__description {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  .inventory-item__quantity {
+    font-size: 14px;
+    color: black;
+  }
+  
+  .error-message {
+    border: 1px solid red;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0px 2px 5px rgba(255, 0, 0, 0.1);
+    color: red;
+  }
+  

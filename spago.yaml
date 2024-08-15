@@ -1,0 +1,16 @@
+package:
+  dependencies:
+  - aff
+  - arrays
+  - console
+  - effect
+  - either
+  - halogen
+  - lists
+  - maybe
+  - prelude
+  name: localventory
+workspace:
+  extra_packages: {}
+  package_set:
+    registry: 41.2.0
