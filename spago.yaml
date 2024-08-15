@@ -1,14 +1,20 @@
 package:
   dependencies:
+    - aff
+    - arrays
     - console
     - effect
+    - either
+    - halogen
+    - lists
+    - maybe
     - prelude
   name: localventory
 workspace:
-  backend:
-    cmd: purescm
-    args:
-      - "build"
+  # backend:
+  #   cmd: purescm
+  #   args:
+  #     - "build"
   extraPackages: {}
   packageSet:
     registry: 57.2.0
