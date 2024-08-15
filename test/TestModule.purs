@@ -1,5 +1,3 @@
--- module TestModule where
-
 module TestModule where
 
 
