@@ -58,9 +58,11 @@
             pkgs.vite
 
             # Chez Scheme compiler and PureScript backend
+            pkgs.purs-bin.purs-0_15_10
+            pkgs.pkg-config
+            pkgs.nodejs-slim
             pkgs.chez
             pkgs.purescm
-            # pursBackendScm
           ]
           ++ (pkgs.lib.optionals (system == "aarch64-darwin")
             (with pkgs.darwin.apple_sdk.frameworks; [

@@ -1,13 +1,7 @@
 package:
   dependencies:
-    - aff
-    - arrays
     - console
     - effect
-    - either
-    - halogen
-    - lists
-    - maybe
     - prelude
   name: localventory
 workspace:
