@@ -11,6 +11,10 @@ package:
   - prelude
   name: localventory
 workspace:
+  backend:
+    cmd: purescm
+    args:
+      - "build"  
   extra_packages: {}
   package_set:
     registry: 41.2.0

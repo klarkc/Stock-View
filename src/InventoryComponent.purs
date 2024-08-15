@@ -66,9 +66,9 @@ handleAction = case _ of
 render :: forall m. MonadAff m => State -> H.ComponentHTML Action () m
 render state =
   HH.div_
-    [ class_ $ HH.ClassName "inventory-container" ]
+    [ css "inventory-container" ]
     [ HH.div_
-        [ class_ $ HH.ClassName "inventory-container__title"
+        [ css "inventory-container__title"
         , HH.h1_ [ HH.text "Inventory" ]
         ]
     , case state.errorMsg of
@@ -81,9 +81,9 @@ renderItem :: forall m. MonadAff m => InventoryItem -> H.ComponentHTML Action ()
 renderItem (InventoryItem { name, description, quantity }) =
   HH.div_
     [ css "inventory-item" ]
-    [ HH.div_ [ class_ $ HH.ClassName "inventory-item__name", HH.text name ]
-    , HH.div_ [ class_ $ HH.ClassName "inventory-item__description", HH.text $ "Description: " <> description ]
-    , HH.div_ [ class_ $ HH.ClassName "inventory-item__quantity", HH.text $ "Quantity: " <> show quantity ]
+    [ HH.div_ [ css "inventory-item__name", HH.text name ]
+    , HH.div_ [ css "inventory-item__description", HH.text $ "Description: " <> description ]
+    , HH.div_ [ css "inventory-item__quantity", HH.text $ "Quantity: " <> show quantity ]
     ]
 
 -- Function to load the inventory (simulated JSON load)
