@@ -1,18 +1,31 @@
-module InventoryComponent where
+module InventoryComponent
+  ( Action(..)
+  , InventoryItem(..)
+  , State
+  , handleAction
+  , initialState
+  , inventoryComponent
+  , render
+  , renderItem
+  )
+  where
 
 import Prelude
-import Effect.Aff (Aff)
-import Effect.Console as Console
-import Halogen as H
-import Halogen.HTML as HH
-import Halogen.HTML.Properties (class_)
-import Halogen (liftAff)
-import Effect.Aff.Class (class MonadAff)
+
+import Data.Array as Array
+import Data.Either (Either(..))
 import Data.List.Types (List(..))
 import Data.Maybe (Maybe(..))
-import Data.Either (Either(..))
-import Data.Array as Array
-import Utils (css)
+import Effect.Aff (Aff)
+import Effect.Aff.Class (class MonadAff)
+import Effect.Console as Console
+import Halogen (liftAff)
+import Halogen as H
+import Halogen.HTML (ClassName(..))
+import Halogen.HTML as HH
+import Halogen.HTML.Properties (class_)
+import Halogen.HTML.Properties as HP
+import Utils (css, maybeElem, whenElem)
 
 -- Define the InventoryItem type
 data InventoryItem = InventoryItem
@@ -63,23 +76,21 @@ render :: forall m. MonadAff m => State -> H.ComponentHTML Action () m
 render state =
   HH.div_
     [ css "inventory-container" ]
-    [ HH.div_
-        [ css "inventory-container__title"
-        , HH.h1_ [ HH.text "Inventory" ]
-        ]
-    , case state.errorMsg of
-        Just err -> HH.div_ [ class_ "error-message", HH.text $ "Error: " <> err ]
-        Nothing -> HH.div_ (Array.fromFoldable (map renderItem state.items))
+    [ HH.h1_ [ css "inventory-container__title" ] [ HH.text "Inventory" ]
+    , maybeElem state.errorMsg \err -> 
+        HH.div_ [ css "error-message" ] [ HH.text $ "Error: " <> err ]
+    , whenElem (not $ Array.null state.items) \_ ->
+        HH.div_ (Array.fromFoldable $ renderItem <$> state.items)
     ]
 
 -- Render each item in the inventory
 renderItem :: forall m. MonadAff m => InventoryItem -> H.ComponentHTML Action () m
 renderItem (InventoryItem { name, description, quantity }) =
   HH.div_
-    [ css "inventory-item" ]
-    [ HH.div_ [ css "inventory-item__name", HH.text name ]
-    , HH.div_ [ css "inventory-item__description", HH.text $ "Description: " <> description ]
-    , HH.div_ [ css "inventory-item__quantity", HH.text $ "Quantity: " <> show quantity ]
+    [ class_ (css "inventory-item") ]
+    [ HH.div_ [ class_ "inventory-item__name" ] [ HH.text name ]
+    , HH.div_ [ class_ "inventory-item__description" ] [ HH.text $ "Description: " <> description ]
+    , HH.div_ [ class_ "inventory-item__quantity" ] [ HH.text $ "Quantity: " <> show quantity ]
     ]
 
 -- Function to load the inventory (simulated JSON load)
