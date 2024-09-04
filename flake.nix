@@ -41,9 +41,42 @@
           patchelf $out/bin/scheme --add-rpath ${pkgs.pcre2.out}/lib
         '';
       });
+      concurrent = pkgs.writeShellApplication {
+        name = "concurrent";
+        runtimeInputs = with pkgs; [ concurrently ];
+        text = ''
+          concurrently\
+            --color "auto"\
+            --prefix "[{command}]"\
+            --handle-input\
+            --restart-tries 10\
+            "$@"
+        '';
+      };
+      spago-watch = pkgs.writeShellApplication {
+        name = "spago-watch";
+        runtimeInputs = with pkgs; [ entr spago-unstable ];
+        text = ''find {src,test} | entr -s "spago $*"'';
+      };
+      dev = pkgs.writeShellApplication {
+        name = "dev";
+        runtimeInputs = with pkgs; [
+          nodejs-slim
+          spago-watch
+          vite
+          concurrent
+        ];
+        text = ''
+          npm install &&
+          concurrent "spago-watch build" vite
+        '';
+      };
     in
       pkgs.mkShell {
         inherit name;
+        shellHook = ''
+          echo "Available commands: dev"
+        '';
         buildInputs =
           [
             pkgs.esbuild
@@ -54,8 +87,8 @@
             pkgs.purs-backend-es
             pkgs.purescript-language-server
             pkgs.spago-unstable
-            pkgs.vite
-
+            vite
+            dev
             # pkgs.purs-bin.purs-0_15_10
             # pkgs.pkg-config
             pkgs.nodejs-slim

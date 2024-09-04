@@ -6,6 +6,7 @@ workspace:
         - aff
         - arrays
         - console
+        - deku
         - effect
         - either
         - halogen
@@ -18,12 +19,17 @@ workspace:
         - arrays
         - avar
         - bifunctors
+        - bolson
         - catenable-lists
+        - colors
         - console
         - const
         - contravariant
         - control
+        - css
         - datetime
+        - debug
+        - deku
         - distributive
         - dom-indexed
         - effect
@@ -31,6 +37,8 @@ workspace:
         - enums
         - exceptions
         - exists
+        - fast-vect
+        - filterable
         - foldable-traversable
         - foreign
         - foreign-object
@@ -43,12 +51,15 @@ workspace:
         - halogen
         - halogen-subscriptions
         - halogen-vdom
+        - hyrule
         - identity
         - integers
         - invariant
         - js-date
         - js-promise
+        - js-timers
         - lazy
+        - lcg
         - lists
         - maybe
         - media-types
@@ -63,11 +74,17 @@ workspace:
         - partial
         - prelude
         - profunctor
+        - quickcheck
+        - quickcheck-laws
+        - random
+        - record
         - refs
         - safe-coerce
         - st
         - strings
+        - stringutils
         - tailrec
+        - these
         - transformers
         - tuples
         - type-equality
@@ -655,6 +672,24 @@ packages:
       - newtype
       - prelude
       - tuples
+  bolson:
+    type: registry
+    version: 0.3.9
+    integrity: sha256-ueWO6q75KELeNAj3SOLmffKbuTmc8//gi9R/DHdHDLU=
+    dependencies:
+      - control
+      - effect
+      - fast-vect
+      - filterable
+      - foldable-traversable
+      - foreign-object
+      - hyrule
+      - maybe
+      - prelude
+      - record
+      - st
+      - tuples
+      - unsafe-coerce
   catenable-lists:
     type: registry
     version: 7.0.0
@@ -667,6 +702,17 @@ packages:
       - prelude
       - tuples
       - unfoldable
+  colors:
+    type: registry
+    version: 7.0.1
+    integrity: sha256-udlg/y2PFsHYli8Tgz8BQGGrOjyGo0BcJj36IfgYADs=
+    dependencies:
+      - arrays
+      - integers
+      - lists
+      - numbers
+      - partial
+      - strings
   console:
     type: registry
     version: 6.1.0
@@ -699,6 +745,19 @@ packages:
     dependencies:
       - newtype
       - prelude
+  css:
+    type: registry
+    version: 6.0.0
+    integrity: sha256-zfSHxgiU4rSWuVxMjSKKh+s7j433wxmsr+CqI6hm9s4=
+    dependencies:
+      - colors
+      - console
+      - effect
+      - nonempty
+      - profunctor
+      - strings
+      - these
+      - transformers
   datetime:
     type: registry
     version: 6.1.0
@@ -720,6 +779,50 @@ packages:
       - partial
       - prelude
       - tuples
+  debug:
+    type: registry
+    version: 6.0.2
+    integrity: sha256-vmkYFuXYuELBzeauvgHG6E6Kf/Hp1dAnxwE9ByHfwSg=
+    dependencies:
+      - functions
+      - prelude
+  deku:
+    type: registry
+    version: 0.9.23
+    integrity: sha256-lD4idKbvidgMx8cOfvvfHjRJyMc8Y0pTGVpZ0t4bb7M=
+    dependencies:
+      - aff
+      - arrays
+      - bolson
+      - catenable-lists
+      - control
+      - css
+      - effect
+      - either
+      - fast-vect
+      - filterable
+      - foldable-traversable
+      - foreign-object
+      - free
+      - hyrule
+      - maybe
+      - newtype
+      - ordered-collections
+      - prelude
+      - profunctor
+      - quickcheck
+      - record
+      - safe-coerce
+      - st
+      - strings
+      - stringutils
+      - transformers
+      - tuples
+      - unsafe-coerce
+      - web-dom
+      - web-events
+      - web-html
+      - web-uievents
   distributive:
     type: registry
     version: 6.0.0
@@ -785,6 +888,34 @@ packages:
     integrity: sha256-A0JQHpTfo1dNOj9U5/Fd3xndlRSE0g2IQWOGor2yXn8=
     dependencies:
       - unsafe-coerce
+  fast-vect:
+    type: registry
+    version: 1.2.0
+    integrity: sha256-0DbjZ1E95RSqwb5STe7LtdI60TloSHxOa9rkYBQyt2I=
+    dependencies:
+      - arrays
+      - distributive
+      - filterable
+      - foldable-traversable
+      - lists
+      - maybe
+      - ordered-collections
+      - prelude
+      - profunctor
+      - tuples
+      - unfoldable
+      - unsafe-coerce
+  filterable:
+    type: registry
+    version: 5.0.0
+    integrity: sha256-cCojJHRnTmpY1j1kegI4CFwghdQ2Fm/8dzM8IlC+lng=
+    dependencies:
+      - arrays
+      - either
+      - foldable-traversable
+      - identity
+      - lists
+      - ordered-collections
   foldable-traversable:
     type: registry
     version: 6.0.0
@@ -959,6 +1090,36 @@ packages:
       - tuples
       - unsafe-coerce
       - web-html
+  hyrule:
+    type: registry
+    version: 2.3.8
+    integrity: sha256-DPCeYX0bdqcxINNi1E4Pfu5ie3pdgfyPdVSKTX7IF4I=
+    dependencies:
+      - arrays
+      - control
+      - datetime
+      - debug
+      - effect
+      - either
+      - filterable
+      - foldable-traversable
+      - js-timers
+      - lists
+      - maybe
+      - newtype
+      - now
+      - ordered-collections
+      - partial
+      - prelude
+      - record
+      - refs
+      - st
+      - tuples
+      - unsafe-coerce
+      - unsafe-reference
+      - web-events
+      - web-html
+      - web-uievents
   identity:
     type: registry
     version: 6.0.0
@@ -1005,6 +1166,12 @@ packages:
       - functions
       - maybe
       - prelude
+  js-timers:
+    type: registry
+    version: 6.1.0
+    integrity: sha256-znHWLSSOYw15P5DTcsAdal2lf7nGA2yayLdOZ2t5r7o=
+    dependencies:
+      - effect
   lazy:
     type: registry
     version: 6.0.0
@@ -1014,6 +1181,17 @@ packages:
       - foldable-traversable
       - invariant
       - prelude
+  lcg:
+    type: registry
+    version: 4.0.0
+    integrity: sha256-h7ME5cthLfbgJOJdsZcSfFpwXsx4rf8YmhebU+3iSYg=
+    dependencies:
+      - effect
+      - integers
+      - maybe
+      - partial
+      - prelude
+      - random
   lists:
     type: registry
     version: 7.0.0
@@ -1149,6 +1327,60 @@ packages:
       - newtype
       - prelude
       - tuples
+  quickcheck:
+    type: registry
+    version: 8.0.1
+    integrity: sha256-ZvpccKQCvgslTXZCNmpYW4bUsFzhZd/kQUr2WmxFTGY=
+    dependencies:
+      - arrays
+      - console
+      - control
+      - effect
+      - either
+      - enums
+      - exceptions
+      - foldable-traversable
+      - gen
+      - identity
+      - integers
+      - lazy
+      - lcg
+      - lists
+      - maybe
+      - newtype
+      - nonempty
+      - numbers
+      - partial
+      - prelude
+      - record
+      - st
+      - strings
+      - tailrec
+      - transformers
+      - tuples
+      - unfoldable
+  quickcheck-laws:
+    type: registry
+    version: 7.0.0
+    integrity: sha256-rnzVTiDnymzYkvnhI8EvPwrmO8LgcTnrMTuiI172Tkc=
+    dependencies:
+      - enums
+      - quickcheck
+  random:
+    type: registry
+    version: 6.0.0
+    integrity: sha256-CJ611a35MPCE7XQMp0rdC6MCn76znlhisiCRgboAG+Q=
+    dependencies:
+      - effect
+      - integers
+  record:
+    type: registry
+    version: 4.0.0
+    integrity: sha256-Za5U85bTRJEfGK5Sk4hM41oXy84YQI0I8TL3WUn1Qzg=
+    dependencies:
+      - functions
+      - prelude
+      - unsafe-coerce
   refs:
     type: registry
     version: 6.0.0
@@ -1192,6 +1424,17 @@ packages:
       - tuples
       - unfoldable
       - unsafe-coerce
+  stringutils:
+    type: registry
+    version: 0.0.12
+    integrity: sha256-t63QWBlp49U0nRqUcFryKflSJsNKGTQAHKjn24/+ooI=
+    dependencies:
+      - arrays
+      - integers
+      - maybe
+      - partial
+      - prelude
+      - strings
   tailrec:
     type: registry
     version: 6.1.0
@@ -1205,6 +1448,17 @@ packages:
       - partial
       - prelude
       - refs
+  these:
+    type: registry
+    version: 6.0.0
+    integrity: sha256-6poQvFzGw7Ir9mTDEbFV9N6+cUeSHe0FdzTR2ZK1o6g=
+    dependencies:
+      - arrays
+      - gen
+      - lists
+      - quickcheck
+      - quickcheck-laws
+      - tuples
   transformers:
     type: registry
     version: 6.1.0
