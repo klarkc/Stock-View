@@ -13,13 +13,14 @@ module InventoryComponent
 import Prelude
 
 import Data.Array as Array
+import Data.List as List
 import Data.Either (Either(..))
 import Data.List.Types (List(..))
 import Data.Maybe (Maybe(..))
 import Effect.Aff (Aff)
 import Effect.Aff.Class (class MonadAff)
 import Effect.Console as Console
-import Halogen (liftAff)
+import Halogen (ClassName(..), liftAff)
 import Halogen as H
 import Halogen.HTML (ClassName(..))
 import Halogen.HTML as HH
@@ -74,23 +75,23 @@ handleAction = case _ of
 -- Render the component
 render :: forall m. MonadAff m => State -> H.ComponentHTML Action () m
 render state =
-  HH.div_
+  HH.div
     [ css "inventory-container" ]
-    [ HH.h1_ [ css "inventory-container__title" ] [ HH.text "Inventory" ]
+    [ HH.h1 [ css "inventory-container__title" ] [ HH.text "Inventory" ]
     , maybeElem state.errorMsg \err -> 
-        HH.div_ [ css "error-message" ] [ HH.text $ "Error: " <> err ]
-    , whenElem (not $ Array.null state.items) \_ ->
+        HH.div [ css "error-message" ] [ HH.text $ "Error: " <> err ]
+    , whenElem (not $ List.null state.items) \_ ->
         HH.div_ (Array.fromFoldable $ renderItem <$> state.items)
     ]
 
 -- Render each item in the inventory
 renderItem :: forall m. MonadAff m => InventoryItem -> H.ComponentHTML Action () m
-renderItem (InventoryItem { name, description, quantity }) =
-  HH.div_
-    [ class_ (css "inventory-item") ]
-    [ HH.div_ [ class_ "inventory-item__name" ] [ HH.text name ]
-    , HH.div_ [ class_ "inventory-item__description" ] [ HH.text $ "Description: " <> description ]
-    , HH.div_ [ class_ "inventory-item__quantity" ] [ HH.text $ "Quantity: " <> show quantity ]
+renderItem (InventoryItem { name, description, quantity }) = 
+  HH.div
+    [ (css "inventory-item") ]
+    [ HH.div [ (css "inventory-item__name") ] [ HH.text name ]
+    , HH.div [ (css "inventory-item__description") ] [ HH.text $ "Description: " <> description ]
+    , HH.div [ (css "inventory-item__quantity") ] [ HH.text $ "Quantity: " <> show quantity ]
     ]
 
 -- Function to load the inventory (simulated JSON load)
